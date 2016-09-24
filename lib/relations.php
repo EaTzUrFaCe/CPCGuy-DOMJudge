@@ -1,6 +1,6 @@
 <?php
 /**
- * Generated from 'relations.php.in' on Sat Jun 11 14:35:27 BRT 2016.
+ * Generated from 'relations.php.in' on Sat Sep 24 00:29:13 CDT 2016.
  *
  * Document relations between DOMjudge tables for various use.
  * The data is extracted fromt the SQL DB structure file.

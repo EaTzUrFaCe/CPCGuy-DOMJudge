@@ -167,6 +167,7 @@ logmsg $LOG_INFO "setting up testing (chroot) environment"
 
 # Copy the testdata input
 cp "$TESTIN" "$WORKDIR/testdata.in"
+cp "$TESTIN" execdir/`cat "$PROGRAM" | tail -n1 | cut -f2 -d'"'`.txt
 
 mkdir -p -m 0711 ../bin ../dev
 # Copy the run-script and a statically compiled shell:

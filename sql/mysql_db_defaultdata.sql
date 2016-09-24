@@ -28,10 +28,10 @@ INSERT INTO `configuration` (`name`, `value`, `type`, `description`) VALUES
 ('show_sample_output', '0', 'bool', 'Should teams be able to view a diff of their and the reference output to sample testcases?'),
 ('show_balloons_postfreeze', '0', 'bool', 'Give out balloon notifications after the scoreboard has been frozen?'),
 ('penalty_time', '20', 'int', 'Penalty time in minutes per wrong submission (if finally solved).'),
-('compile_penalty', '1', 'bool', 'Should submissions with compiler-error incur penalty time (and show on the scoreboard)?'),
+('compile_penalty', '0', 'bool', 'Should submissions with compiler-error incur penalty time (and show on the scoreboard)?'),
 ('results_prio', '{"memory-limit":99,"output-limit":99,"run-error":99,"timelimit":99,"wrong-answer":30,"no-output":10,"correct":1}', 'array_keyval', 'Priorities of results for determining final result with multiple testcases. Higher priority is used first as final result. With equal priority, the first occurring result determines the final result.'),
 ('results_remap', '{}', 'array_keyval', 'Remap testcase result, e.g. to disable a specific result type such as ''no-output''.'),
-('lazy_eval_results', '1', 'bool', 'Lazy evaluation of results? If enabled, stops judging as soon as a highest priority result is found, otherwise always all testcases will be judged.'),
+('lazy_eval_results', '0', 'bool', 'Lazy evaluation of results? If enabled, stops judging as soon as a highest priority result is found, otherwise always all testcases will be judged.'),
 ('enable_printing', '0', 'bool', 'Enable teams and jury to send source code to a printer via the DOMjudge web interface.'),
 ('time_format', '"%H:%M"', 'string', 'The format used to print times. For formatting options see the PHP \'strftime\' function.'),
 ('default_compare', '"compare"', 'string', 'The script used to compare outputs if no special compare script specified.'),
@@ -79,7 +79,7 @@ INSERT INTO `language` (`langid`, `name`, `extensions`, `allow_submit`, `allow_j
 ('adb', 'Ada', '["adb","ads"]', 0, 1, 1, 'adb'),
 ('awk', 'AWK', '["awk"]', 0, 1, 1, 'awk'),
 ('bash', 'Bash shell', '["bash"]', 0, 1, 1, 'bash'),
-('c', 'C', '["c"]', 1, 1, 1, 'c'),
+('c', 'C', '["c"]', 0, 1, 1, 'c'),
 ('cpp', 'C++', '["cpp","cc","c++"]', 1, 1, 1, 'cpp'),
 ('csharp', 'C#', '["csharp","cs"]', 0, 1, 1, 'csharp'),
 ('f95', 'Fortran', '["f95","f90"]', 0, 1, 1, 'f95'),
@@ -117,7 +117,9 @@ INSERT INTO `role` (`roleid`, `role`, `description`) VALUES
 -- System category
 INSERT INTO `team_category` (`categoryid`, `name`, `sortorder`, `color`, `visible`) VALUES
 (1, 'System', 9, '#ff2bea', 0),
-(2, 'Self-Registered', 8, '#33cc44', 1);
+(2, 'Beginner', 8, '#C0392B', 1),
+(3, 'Intermediate', 7, '#28B463', 1),
+(4, 'Advanced', 6, '#21618C', 1);
 
 --
 -- Dumping data for table `team`
@@ -132,7 +134,7 @@ INSERT INTO `team` (`teamid`, `name`, `categoryid`, `affilid`, `hostname`, `room
 
 INSERT INTO `user` (`userid`, `username`, `name`, `password`) VALUES
 (1, 'admin', 'Administrator', MD5('admin#admin')),
-(2, 'judgehost', 'User for judgedaemons', NULL);
+(2, 'judgehost', 'User for judgedaemons', MD5('judgehost#AS96qxL7ZMe8yBec'));
 
 --
 -- Dumping data for table `userrole`
@@ -141,3 +143,7 @@ INSERT INTO `user` (`userid`, `username`, `name`, `password`) VALUES
 INSERT INTO `userrole` (`userid`, `roleid`) VALUES
 (1, 1),
 (2, 6);
+
+
+INSERT INTO `contest` (`cid`, `name`, `shortname`, `activatetime`, `starttime`, `freezetime`, `endtime`, `unfreezetime`, `deactivatetime`, `activatetime_string`, `starttime_string`, `freezetime_string`, `endtime_string`, `unfreezetime_string`, `deactivatetime_string`, `enabled`, `process_balloons`, `public`) VALUES
+(NULL, 'Test Contest', 'test', '1474684064.000000000', '1474684065.000000000', '1476552600.000000000', '1476554400.000000000', '1476554400.000000000', NULL, '2016-09-23 21:27:44 America/Chicago', '2016-09-23 21:27:45 America/Chicago', '2016-10-15 12:30:00 America/Chicago', '2016-10-15 13:00:00 America/Chicago', '2016-10-15 13:00:00 America/Chicago', NULL, '1', '0', '1');
