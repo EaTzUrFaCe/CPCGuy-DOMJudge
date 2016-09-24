@@ -1,0 +1,5 @@
+!/bin/bash
+
+$(judgehost_bindir)/create_cgroups
+echo 0 > /proc/sys/kernel/randomize_va_space 
+
